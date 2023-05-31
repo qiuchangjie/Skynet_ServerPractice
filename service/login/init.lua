@@ -13,7 +13,7 @@ service.resp.client = function(source, fd, cmd, msg)
 end
 
 service.client.login = function(fd, msg, source)
-    local playerid = msg[2]
+    local playerid = tonumber(msg[2])
     local pwd = msg[3]
     local gate = source
     local node = skynet.getenv("node")
@@ -36,7 +36,7 @@ service.client.login = function(fd, msg, source)
     if not isok then
         return {"login", 1, "gate注册失败"}
     end
-    skynet.error("login succ" .. playerid)
+    skynet.error("login succ " .. playerid)
     return {"login", 0, "登陆成功"}
 end
 

@@ -6,6 +6,14 @@ local runconfig = require "runconfig"
 conns = {} -- [fd] = conn
 players = {} -- [playerid] = gateplayer
 
+function table_len(t)
+    local count = 0
+    for i,v in pairs(t) do
+        count = count + 1
+    end
+    return count
+end
+
 -- 连接类
 function conn()
     local m = {
@@ -146,6 +154,7 @@ service.resp.send_by_fd = function(source, fd, msg)
 end
 
 service.resp.send = function(source, playerid, msg)
+    -- skynet.error("gateway send playerid=" .. playerid .. " cmd=" .. msg[1])
     local gplayer = players[playerid]
     if gplayer == nil then
         return
